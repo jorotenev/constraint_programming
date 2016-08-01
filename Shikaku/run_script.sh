@@ -3,12 +3,12 @@ short=("tiny" "p(3,1)" )
 problems_to_run=${allproblems[@]}
 
 iteration=$1
-
-rm -rf log/log$iteration 
-mkdir log/log$iteration
+folder=log/log_$iteration 
+rm -rf $folder
+mkdir $folder
 limit=$2
 for i in ${problems_to_run[@]}; do
-	output_file=log/log$iteration/output_$i.log
+	output_file=$folder/output_$i.log
 	echo $i
 	echo "begin-- $i" >> $output_file
 	echo "Timeout is $limit" >> $output_file
@@ -16,4 +16,4 @@ for i in ${problems_to_run[@]}; do
 	echo "end-- $i" >> $output_file
 done
 
-python parse_log.py log/log$iteration True
+python parse_log.py $folder  True

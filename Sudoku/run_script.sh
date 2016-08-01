@@ -7,10 +7,11 @@ iteration=$1
 
 limit=$2
 viewpoint=$3
-rm -rf $viewpoint/log_$iteration 
-mkdir $viewpoint/log_$iteration
+folder=$viewpoint/log_$iteration 
+rm -rf $folder
+mkdir $folder
 for i in ${toRun[@]}; do
-	output_file=$viewpoint/log_$iteration/output_$i.log
+	output_file=$folder/output_$i.log
 	echo $i
 	echo "begin-- $i" >> $output_file
 	echo "Timeout is $limit" >> $output_file
@@ -19,5 +20,5 @@ for i in ${toRun[@]}; do
 	echo "end-- $i" >> $output_file
 done
 
-python parse_log.py $viewpoint/log_$iteration  # combine the logs to a table with results
-python parse_raw_output_$viewpoint.py $viewpoint/log_$iteration # parse the answers to a more friendly format, useful for checking via http://www.sudoku-solutions.com/
+python parse_log.py $folder  # combine the logs to a table with results
+python parse_raw_output_$viewpoint.py $folder # parse the answers to a more friendly format, useful for checking via http://www.sudoku-solutions.com/
